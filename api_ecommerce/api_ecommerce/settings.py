@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'django_filters',
     'server'
 ]
 
@@ -72,9 +76,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'api_ecommerce.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'GB E-COMMERCE API',
+    'DESCRIPTION': 'Projeto de backend com CRUD, Busca, Filtro, Documentação',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
+}
 
 DATABASES = {
     'default': {
