@@ -23,6 +23,11 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = ReviewModel
         fields = '__all__'
         
+class AllReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReviewModel
+        fields = ['description']
+        
 class SupplierSerializer(serializers.ModelSerializer):
     class Meta:
         model = SupplierModel

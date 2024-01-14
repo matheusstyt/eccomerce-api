@@ -24,6 +24,8 @@ from django.urls import path
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('categories/<int:pk>/products/', AllProductsCategoryViewSet.as_view()),
+    path('products/<int:pk>/reviews/', AllReviewsProduct.as_view()),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('doc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
