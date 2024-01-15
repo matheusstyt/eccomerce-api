@@ -1,33 +1,25 @@
 from django.urls import include, path
-from server.views import *
 
-from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from drf_spectacular.views import *
 
-from rest_framework_simplejwt.views import (
-  TokenObtainPairView,
-  TokenRefreshView,
-  TokenVerifyView
-)
+from rest_framework_simplejwt.views import *
 
 from rest_framework import routers
 
 router = routers.DefaultRouter()
 
-router.register('products', ProductViewSet, basename='Products')
-router.register('categories', CategoryViewSet, basename='Categories')
-router.register('priceHistory', PriceHistoryViewSet, basename='PriceHistories')
-router.register('reviews', ReviewViewSet, basename='Reviews')
-router.register('suppliers', SupplierViewSet, basename='Suppliers')
+from products.urls import urlpatterns as products_urls
+from categories.urls import urlpatterns as categories_urls
+from suppliers.urls import urlpatterns as suppliers_urls
 
 from django.contrib import admin
 from django.urls import path
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('admin/', admin.site.urls),
-    path('categories/<int:pk>/products/', AllProductsCategoryViewSet.as_view()),
-    path('products/<int:pk>/reviews/', AllReviewsProduct.as_view()),
-    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('products/', include(products_urls)),
+    path('categories/', include(categories_urls)),
+    path('suppliers/', include(suppliers_urls)),
     path('doc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('token/', TokenObtainPairView.as_view(), name='get_new_token'),
     path('token/refresh', TokenRefreshView.as_view(), name='refresh_token'),
