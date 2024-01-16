@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  
+  db:
+    image: postgres:15
+    container_name: db-postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=gb_ecommerce
+
+  api_ecommerce:
+    build: ./app
+    container_name: api-ecommerce
+    command: python manage.py runserver 0.0.0.0:8080
+    volumes:
+      - ./app/:/usr/src/app/
+    ports:
+      - 8080:8080
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+volumes:
+  postgres_data:
