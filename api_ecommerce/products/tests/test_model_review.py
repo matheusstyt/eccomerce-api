@@ -33,8 +33,8 @@ class ReviewModelModelTestCase(TestCase):
             product = self.product,
             user= self.user,
         )
-    def test_verificando_atributos_do_price_hitory (self):
-        """"Teste que verifica valores dafault de reviews"""
+    def test_verificando_atributos_do_reviews (self):
+        """"Teste que verifica valores default de reviews"""
         self.assertEqual(self.review.user, self.user)
         self.assertEqual(self.review.product, self.product)
         self.assertEqual(self.review.rating, 3)
