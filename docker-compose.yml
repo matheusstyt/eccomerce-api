@@ -4,7 +4,7 @@ services:
   
   db:
     image: postgres:15
-    container_name: db-postgres
+    container_name: db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
@@ -12,18 +12,25 @@ services:
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=postgres
     - POSTGRES_DB=gb_ecommerce
-
-  api_ecommerce:
-    build: ./app
-    container_name: api-ecommerce
-    command: python manage.py runserver 0.0.0.0:8080
+    networks:
+      - compose-bridge
+  api:
+    build: ./api_ecommerce
+    container_name: api
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./app/:/usr/src/app/
+      - ./api_ecommerce/:/usr/src/app/
     ports:
-      - 8080:8080
+      - 8000:8000
     env_file:
       - ./.env.dev
     depends_on:
       - db
+    networks:
+      - compose-bridge
 volumes:
   postgres_data:
+
+networks:
+  compose-bridge:
+    driver: bridge

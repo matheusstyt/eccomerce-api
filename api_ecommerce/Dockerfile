@@ -1,4 +1,4 @@
-FROM python:3.12.1
+FROM python:3.11.4-slim-buster
 
 WORKDIR ${PWD}/api_ecommerce:/usr/src/app/
 
