@@ -7,8 +7,13 @@ from django_filters.rest_framework import DjangoFilterBackend
 from products.models import *
 from products.serializers import *
 
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, BasePermission
 from rest_framework.authentication import BasicAuthentication
+
+class IsGetOrAuthenticated(BasePermission):
+    def has_permission(self, request, view):
+        # Permite get para todos
+        return request.method == 'GET' or request.user and request.user.is_authenticated
 
 class PriceHistoryViewSet(ModelViewSet):
     queryset=PriceHistoryModel.objects.all()
@@ -22,15 +27,7 @@ class ProductViewSet(ModelViewSet):
     queryset=ProductModel.objects.all()
     serializer_class=ProductSerializer    
     authentication_classes= [BasicAuthentication]
-    permission_classes= [IsAuthenticated]
-    
-    def get(self, request, *args, **kwargs):
-        reviews_product = ReviewModel.objects.filter(product=self.get_object())
-        total_rating = 0
-        for review in reviews_product:
-            total_rating += review.rating
-        #incluir total_rating no get
-        return super().get(request, *args, **kwargs)
+    permission_classes= [IsGetOrAuthenticated]
     
     def create(self, request, *args, **kwargs):
         try:   
@@ -40,18 +37,14 @@ class ProductViewSet(ModelViewSet):
                 product = product_instance,
                 value = request.data.get('price')
             )
-            print('chegou aqui 1')
-            print(price_history_instance)
             return response
         except:
             return http.HTTPStatus.BAD_REQUEST
             
     def update(self, request, *args, **kwargs):
-        print('oii')
         try:
             response = super().update(request, *args, **kwargs)
             product_instance = self.get_object()
-            print('chegou aqui 2')
             if request.data.get('price'):
                 price_history_instance = PriceHistoryModel.objects.create(
                     product = product_instance,
@@ -66,8 +59,6 @@ class ProductViewSet(ModelViewSet):
         try:
             response = super().retrieve(request, *args, **kwargs)
             product_instance = self.get_object()
-            print('chegou aqui 3')
-            print(request.data.get('price'))
             if request.data.get('price'):
                 price_history_instance = PriceHistoryModel.objects.create(
                     product = product_instance,
@@ -96,4 +87,4 @@ class ReviewViewSet(ModelViewSet):
     queryset=ReviewModel.objects.all()
     serializer_class=ReviewSerializer
     authentication_classes= [BasicAuthentication]
-    permission_classes= [IsAuthenticated]
+    permission_classes= [IsGetOrAuthenticated]
