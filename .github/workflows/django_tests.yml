@@ -27,4 +27,4 @@ jobs:
         pip install -r api_ecommerce/requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        python api_ecommerce/manage.py test api_ecommerce
