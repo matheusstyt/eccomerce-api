@@ -23,6 +23,15 @@ class ProductViewSet(ModelViewSet):
     serializer_class=ProductSerializer    
     authentication_classes= [BasicAuthentication]
     permission_classes= [IsAuthenticated]
+    
+    def get(self, request, *args, **kwargs):
+        reviews_product = ReviewModel.objects.filter(product=self.get_object())
+        total_rating = 0
+        for review in reviews_product:
+            total_rating += review.rating
+        #incluir total_rating no get
+        return super().get(request, *args, **kwargs)
+    
     def create(self, request, *args, **kwargs):
         try:   
             response = super().create(request, *args, **kwargs)
