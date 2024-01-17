@@ -5,8 +5,12 @@ from drf_spectacular.views import *
 from rest_framework_simplejwt.views import *
 
 from rest_framework import routers
+from products.views import PriceHistoryViewSet, ReviewViewSet
 
-router = routers.DefaultRouter()
+routerPrice = routers.DefaultRouter()
+routerPrice.register('', PriceHistoryViewSet, basename='PriceHistories')
+routerReview = routers.DefaultRouter()
+routerReview.register('', ReviewViewSet, basename='Reviews')
 
 from products.urls import urlpatterns as products_urls
 from categories.urls import urlpatterns as categories_urls
@@ -17,6 +21,8 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', include(products_urls)),
+    path('pricesHistory/', include(routerPrice.urls)),
+    path('reviews/', include(routerReview.urls)),
     path('categories/', include(categories_urls)),
     path('suppliers/', include(suppliers_urls)),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
