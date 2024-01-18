@@ -1,6 +1,4 @@
-# API GB E-COMMERCE
-
-## PASSO A PASSO COMO INSTALAR API
+# API GB E-COMMERCE - PASSO-A-PASSO
 
 ## Certifique-se de ter o Docker e Docker Compose instalados
 
