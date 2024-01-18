@@ -47,6 +47,14 @@
   <pre><code>http://localhost:8000/redoc</code></pre>
 </div>
 
+### Paginação de Produtos
+<div>
+  <span class="copy-icon">
+    <i class="fas fa-copy"></i>
+  </span>
+  <pre><code>http://localhost:8000/products/?page=1&pagesize=20</code></pre>
+</div>
+
 ## Testes da API
 **Caso queria testar a API no terminal.**
 
