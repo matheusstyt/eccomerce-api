@@ -79,7 +79,7 @@
   <span class="copy-icon">
     <i class="fas fa-copy"></i>
   </span>
-  <pre><code>docker exec api python manage.py test categories</code></pre>
+  <pre><code>docker exec api python manage.py test suppliers</code></pre>
 </div>
 
 
