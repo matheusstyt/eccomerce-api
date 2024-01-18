@@ -2,26 +2,27 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "*" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "*" ]
 
 jobs:
-
   build:
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'windows-latest']
 
-    runs-on: ubuntu-latest
-
+    runs-on: ${{matrix.os}}
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
+    - name: Construindo Image Docker
       run: docker-compose build
 
-    - name: Create api
+    - name: Iniciando Contâineres
       run: docker-compose up -d --build
 
-    - name: Exibindo images ativas
+    - name: Exibindo Contâineres ativos
       run: docker ps
 
-    - name: Testando API 
+    - name: Testando API com "exec"
       run: docker exec api python manage.py test
