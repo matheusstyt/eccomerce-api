@@ -15,5 +15,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-    
       run: docker-compose build
+
+    - name: Create api
+      run: docker-compose up -d --build
+
+    - name: Exibindo images ativas
+      run: docker ps
+
+    - name: Testando API 
+      run: docker exec api python manage.py test
