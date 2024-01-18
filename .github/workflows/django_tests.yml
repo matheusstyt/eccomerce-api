@@ -30,3 +30,20 @@ jobs:
     - name: Iniciando Testes
       run: |
         python api_ecommerce/manage.py test api_ecommerce
+
+  build:
+    runs-on: 'ubuntu-latest'
+    needs: test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Construindo Image Docker
+        run: docker-compose build
+  
+      - name: Iniciando Contâineres
+        run: docker-compose up -d --build
+  
+      - name: Exibindo Contâineres ativos
+        run: docker ps
+  
+      - name: Testando API com comando "exec"
+        run: docker exec api python manage.py test
