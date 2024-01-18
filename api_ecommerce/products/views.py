@@ -80,7 +80,7 @@ class RecommendedProducts(ListAPIView):
     serializer_class = ProductSerializer
     def get_queryset(self):
         product = get_object_or_404(ProductModel, pk=self.kwargs['pk'])
-        queryset = ProductModel.objects.filter(category=product.category)
+        queryset = ProductModel.objects.filter(category=product.category).exclude(pk=product.pk)
         return queryset
 
 class ReviewViewSet(ModelViewSet):
