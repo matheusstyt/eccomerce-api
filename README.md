@@ -1,0 +1,51 @@
+# API GB E-COMMERCE
+
+## PASSO A PASSO COMO INSTALAR API
+
+## Certifique-se de ter o Docker e Docker Compose instalados
+
+### Inicie a Aplicação com Docker Compose
+<div>
+  <span class="copy-icon">
+    <i class="fas fa-copy"></i>
+  </span>
+  <pre><code>docker-compose up -d --build</code></pre>
+</div>
+
+### Executar Migrações e Criar Superusuário
+<div>
+  <span class="copy-icon">
+    <i class="fas fa-copy"></i>
+  </span>
+  <pre><code>docker-compose exec api python manage.py makemigrations</code></pre>
+</div>
+<div>
+  <span class="copy-icon">
+    <i class="fas fa-copy"></i>
+  </span>
+  <pre><code>docker-compose exec api python manage.py migrate</code></pre>
+</div>
+
+<div>
+  <span class="copy-icon">
+    <i class="fas fa-copy"></i>
+  </span>
+  <pre><code>docker-compose exec api python manage.py createsuperuser --noinput</code></pre>
+</div>
+
+### Acessar a API
+<div>
+  <span class="copy-icon">
+    <i class="fas fa-copy"></i>
+  </span>
+  <pre><code>http://localhost:8000</code></pre>
+</div>
+
+## Testes da API
+**Caso queria testar a API no terminal**
+<div>
+  <span class="copy-icon">
+    <i class="fas fa-copy"></i>
+  </span>
+  <pre><code>docker exec api python manage.py test</code></pre>
+</div>
