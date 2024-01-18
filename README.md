@@ -31,12 +31,20 @@
   <pre><code>docker-compose exec api python manage.py createsuperuser --noinput</code></pre>
 </div>
 
-### Acessar a API
+### Acessar a API / Swagger
 <div>
   <span class="copy-icon">
     <i class="fas fa-copy"></i>
   </span>
   <pre><code>http://localhost:8000</code></pre>
+</div>
+
+### Acessar Redoc
+<div>
+  <span class="copy-icon">
+    <i class="fas fa-copy"></i>
+  </span>
+  <pre><code>http://localhost:8000/redoc</code></pre>
 </div>
 
 ## Testes da API
