@@ -63,7 +63,7 @@
   <span class="copy-icon">
     <i class="fas fa-copy"></i>
   </span>
-  <pre><code>docker exec api python manage.py test product</code></pre>
+  <pre><code>docker exec api python manage.py test products</code></pre>
 </div>
 
 ### Testando Categories, Model e Autentição de get sem logar.
