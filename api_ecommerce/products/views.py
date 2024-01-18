@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import ListAPIView
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.pagination import PageNumberPagination
 
 from products.models import *
 from products.serializers import *
@@ -21,6 +22,11 @@ class PriceHistoryViewSet(ModelViewSet):
     authentication_classes= [BasicAuthentication]
     permission_classes= [IsAuthenticated]
 
+class ProductPagination(PageNumberPagination):
+    page_size = 2
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+    
 class ProductViewSet(ModelViewSet):
     filter_backends= [DjangoFilterBackend]
     filterset_fields = ['name']
@@ -28,6 +34,7 @@ class ProductViewSet(ModelViewSet):
     serializer_class=ProductSerializer    
     authentication_classes= [BasicAuthentication]
     permission_classes= [IsGetOrAuthenticated]
+    pagination_class = ProductPagination
     
     def create(self, request, *args, **kwargs):
         try:   
