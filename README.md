@@ -40,10 +40,46 @@
 </div>
 
 ## Testes da API
-**Caso queria testar a API no terminal**
+**Caso queria testar a API no terminal.**
+
+### Testando Todos os casos.
 <div>
   <span class="copy-icon">
     <i class="fas fa-copy"></i>
   </span>
   <pre><code>docker exec api python manage.py test</code></pre>
 </div>
+
+### Testando Token, Refresh_Token, Verify_Token, Autenticação do usuário.
+<div>
+  <span class="copy-icon">
+    <i class="fas fa-copy"></i>
+  </span>
+  <pre><code>docker exec api python manage.py test api_ecommerce</code></pre>
+</div>
+
+### Testando Product, Reviews Model e Autentição de get sem logar.
+<div>
+  <span class="copy-icon">
+    <i class="fas fa-copy"></i>
+  </span>
+  <pre><code>docker exec api python manage.py test product</code></pre>
+</div>
+
+### Testando Categories, Model e Autentição de get sem logar.
+<div>
+  <span class="copy-icon">
+    <i class="fas fa-copy"></i>
+  </span>
+  <pre><code>docker exec api python manage.py test categories</code></pre>
+</div>
+
+### Testando Suppliers, Model e Autentição de get sem logar.
+<div>
+  <span class="copy-icon">
+    <i class="fas fa-copy"></i>
+  </span>
+  <pre><code>docker exec api python manage.py test categories</code></pre>
+</div>
+
+
