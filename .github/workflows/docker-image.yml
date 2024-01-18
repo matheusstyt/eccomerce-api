@@ -1,0 +1,27 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Construindo Image Docker
+      run: docker-compose build
+
+    - name: Iniciando Contâineres
+      run: docker-compose up -d --build
+
+    - name: Exibindo Contâineres ativos
+      run: docker ps
+
+    - name: Testando API com comando "exec"
+      run: docker exec api python manage.py test
