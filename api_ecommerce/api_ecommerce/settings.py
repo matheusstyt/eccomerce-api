@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphene_django',
     'drf_spectacular',
     'drf_spectacular_sidecar',
     'rest_framework',
@@ -126,6 +127,10 @@ LOGGING = {
             "propagate": False,
         },
     },
+}
+
+GRAPHENE = {
+    "SCHEMA": "products.schema.schema"
 }
 
 USE_I18N = True

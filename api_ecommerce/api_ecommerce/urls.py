@@ -4,6 +4,7 @@ from drf_spectacular.views import *
 
 from rest_framework_simplejwt.views import *
 
+from graphene_django.views import GraphQLView
 from rest_framework import routers
 from products.views import PriceHistoryViewSet, ReviewViewSet
 
@@ -31,4 +32,5 @@ urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='get_new_token'),
     path('token/refresh', TokenRefreshView.as_view(), name='refresh_token'),
     path('token/verify', TokenVerifyView.as_view(), name='verify_token'),
+    path('graphql', GraphQLView.as_view(graphiql=True)),
 ]
