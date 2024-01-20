@@ -39,6 +39,14 @@
   <pre><code>http://localhost:8000</code></pre>
 </div>
 
+### Acessar GraphQl
+<div>
+  <span class="copy-icon">
+    <i class="fas fa-copy"></i>
+  </span>
+  <pre><code>http://localhost:8000/graphql</code></pre>
+</div>
+
 ### Acessar Redoc
 <div>
   <span class="copy-icon">
